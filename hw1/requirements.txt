@@ -1,0 +1,4 @@
+matplotlib==2.1.2
+scikit_image==0.14.0
+numpy==1.14.0+mkl
+skimage==0.0
