@@ -1,0 +1,8 @@
+\BOOKMARK [1][-]{section.1}{Perform Gaussian smoothing over Keanu's face}{}% 1
+\BOOKMARK [1][-]{section.2}{Function to compute and display 2D Gaussian Derivative masks}{}% 2
+\BOOKMARK [1][-]{section.3}{Compute and Display the effect of our filter}{}% 3
+\BOOKMARK [1][-]{section.4}{Threshold with different T levels}{}% 4
+\BOOKMARK [1][-]{section.5}{Compare with Sobel masks}{}% 5
+\BOOKMARK [1][-]{section.6}{Canny Edge detector}{}% 6
+\BOOKMARK [1][-]{section.7}{Optional: Etch-a-sketch effect}{}% 7
+\BOOKMARK [1][-]{section.8}{Optional: A Scanner Darkly Effect using Image Segmentation}{}% 8

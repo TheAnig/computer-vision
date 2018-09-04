@@ -1,0 +1,733 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw2-soln}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \noindent
+\large\textbf{Homework Assignment 2} \hfill \textbf{Anirudh Ganesh} \\
+\normalsize Computer Vision for HCI \hfill CSE5524 (Au `18) \\
+Prof. Jim Davis \hfill Score: \_\_\_/15 \\
+TA: Sayan Mandal \hfill Due Date: 09/04/18
+    
+    
+
+    
+    \hypertarget{importing-libraries}{%
+\paragraph{Importing Libraries}\label{importing-libraries}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{imread}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{gaussian}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+\end{Verbatim}
+
+
+    \hypertarget{load-teds-face}{%
+\paragraph{Load Ted's face}\label{load-teds-face}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{keanu} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keanu.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{create-a-list-of-sigmas-to-iterate-over}{%
+\paragraph{Create a list of sigma's to iterate
+over}\label{create-a-list-of-sigmas-to-iterate-over}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{sigmas} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}
+\end{Verbatim}
+
+
+    Note: In the included document for the homework assignment,
+\texttt{fspecial()} for MATLAB took size of gaussian kernel as an
+argument (hsize), hence it was necessary to use the formula given in the
+slides \(radius = 2*ceil(sigma)+1\). As of current versions of MATLAB
+\texttt{fspecial()} has been deprecated for \texttt{imgaussfilt()} which
+automatically implements filter size as given
+\href{https://www.mathworks.com/help/images/ref/imgaussfilt.html}{here}.
+Similarly, the equivalent function in Python that I'm using
+\texttt{skimage.filters.gaussian()} is a wrapper around
+\texttt{scipy.ndi.gaussian()} which implements the Gaussian filter
+similarly. Hence, there is no need to pass the second argument.
+\href{https://github.com/scipy/scipy/blob/v0.14.0/scipy/ndimage/filters.py\#L250}{Source
+for Python function}
+
+    \hypertarget{perform-gaussian-smoothing-over-keanus-face}{%
+\section{Perform Gaussian smoothing over Keanu's
+face}\label{perform-gaussian-smoothing-over-keanus-face}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{f}\PY{p}{,} \PY{n}{axarr} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+        \PY{k}{for} \PY{n}{sigma} \PY{o+ow}{in} \PY{n}{sigmas}\PY{p}{:}
+            \PY{n}{filteredIm} \PY{o}{=} \PY{n}{gaussian}\PY{p}{(}\PY{n}{keanu}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+            \PY{n}{idx} \PY{o}{=} \PY{n}{sigmas}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}print((int(idx/3), idx\PYZpc{}3))}
+            \PY{n}{axarr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{idx}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].axis(\PYZsq{}off\PYZsq{})
+            \PY{n}{axarr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{idx}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].set\PYZus{}title(f\PYZsq{}\PYZdl{}\PYZbs{}sigma\PYZdl{} = \PYZob{}sigma\PYZcb{}\PYZsq{})
+            \PY{n}{axarr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{idx}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].imshow(filteredIm, cmap = \PYZsq{}gray\PYZsq{}, aspect=\PYZsq{}auto\PYZsq{})
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Notice that the list of \(\sigma\)s used in the above example doesn't
+follow any linear or even log-linear scale. This is because I have
+chosen these values after some trial and error with my friends in order
+of cognitive difficulty in terms of identifying Keanu Reeves.
+Interesting observation I found was \(\sigma=10\) was the point of most
+controversy, as this seems like the value where some of my friends were
+able to identify but others were clueless. Also interesting to note is
+that \(\sigma\) values less than 5 seem to have no effect on anyone.
+
+    \hypertarget{function-to-compute-and-display-2d-gaussian-derivative-masks}{%
+\section{Function to compute and display 2D Gaussian Derivative
+masks}\label{function-to-compute-and-display-2d-gaussian-derivative-masks}}
+
+    From the class notes, we know that,
+
+\[G_x = \frac{-x}{2\pi\sigma^4}e^{-\frac{x^2 + y^2}{2\sigma}}\]
+\[G_y = \frac{-y}{2\pi\sigma^4}e^{-\frac{x^2 + y^2}{2\sigma}}\]
+
+    From the above set of equations and comparing with instructions
+presented in our homework document, we can implement a naive derivative
+filter to be used with \texttt{sklearn.ndi.generic\_filter}.
+
+\begin{verbatim}
+def gaussX(sigma):
+    l = 2 * sigma + 1
+    ax = np.arange(-l, l)
+    xx, yy = np.meshgrid(ax, ax)
+
+    kernel = -(xx * np.exp(-(xx**2 + yy**2) / (2. * sigma**2)))/ (2*math.pi* (sigma**4))
+
+    kernel = kernel / np.sum(kernel)
+
+    return kernel
+
+def gaussY(sigma):
+    l = 2 * sigma + 1
+    ax = np.arange(-l, l)
+    xx, yy = np.meshgrid(ax, ax)
+
+    kernel = -(yy * np.exp(-(xx**2 + yy**2) / (2. * sigma**2)))/ (2*math.pi* (sigma**4))
+
+    kernel = kernel / np.sum(kernel)
+
+    return kernel
+\end{verbatim}
+
+The reason why I haven't done this is because, while its relatively easy
+to implement the filter itself this way, due to the way skimage
+processes, applying the filter becomes a pain point in terms of applying
+it programmatically.
+
+    Instead I choose to apply the same derivative using a more efficient
+method (drawn from our class discussion of being able to split a
+gaussian filter into two steps of 1D filters).
+
+This is calculated by creating a base gaussian kernel given by
+\(k = \frac{1}{2\pi\sigma}\sum e^{\frac{x^2}{2\sigma}}\) then
+multiplying, \(t = \frac{x}{\sigma^2}\), thus we get our \(G_x\) and
+\(G_y\) respectively.
+
+Implementing it this way, also allows us to transpose our \(G_x\) to get
+\(G_y\) and thus provides for a succint implementation of the required
+function
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{ndimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{correlate1d}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{ndimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{\PYZus{}ni\PYZus{}support}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{color} \PY{k}{import} \PY{n}{guess\PYZus{}spatial\PYZus{}dimensions}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{\PYZus{}shared}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{convert\PYZus{}to\PYZus{}float}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{ndimage} \PY{k}{as} \PY{n}{ndi}
+        
+        \PY{k}{def} \PY{n+nf}{gaussian\PYZus{}derivative\PYZus{}filter1d}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{output}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}\PY{n}{mode}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{reflect}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cval}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{truncate}\PY{o}{=}\PY{l+m+mf}{4.0}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{sd} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} make the radius of the filter equal to truncate standard deviations}
+            \PY{n}{lw} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{truncate} \PY{o}{*} \PY{n}{sd} \PY{o}{+} \PY{l+m+mf}{0.5}\PY{p}{)}
+            \PY{n}{weights} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{lw} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{weights}\PY{p}{[}\PY{n}{lw}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{1.0}
+            \PY{n+nb}{sum} \PY{o}{=} \PY{l+m+mf}{1.0}
+            \PY{n}{sd} \PY{o}{=} \PY{n}{sd} \PY{o}{*} \PY{n}{sd}
+            \PY{c+c1}{\PYZsh{} calculate the kernel:}
+            \PY{k}{for} \PY{n}{ii} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{lw} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{tmp} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n+nb}{float}\PY{p}{(}\PY{n}{ii} \PY{o}{*} \PY{n}{ii}\PY{p}{)} \PY{o}{/} \PY{n}{sd}\PY{p}{)}
+                \PY{n}{weights}\PY{p}{[}\PY{n}{lw} \PY{o}{+} \PY{n}{ii}\PY{p}{]} \PY{o}{=} \PY{n}{tmp}
+                \PY{n}{weights}\PY{p}{[}\PY{n}{lw} \PY{o}{\PYZhy{}} \PY{n}{ii}\PY{p}{]} \PY{o}{=} \PY{n}{tmp}
+                \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{l+m+mf}{2.0} \PY{o}{*} \PY{n}{tmp}
+            \PY{k}{for} \PY{n}{ii} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{lw} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{weights}\PY{p}{[}\PY{n}{ii}\PY{p}{]} \PY{o}{/}\PY{o}{=} \PY{n+nb}{sum}
+            \PY{c+c1}{\PYZsh{} implement first order derivative:}
+            \PY{n}{weights}\PY{p}{[}\PY{n}{lw}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.0}
+            \PY{k}{for} \PY{n}{ii} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{lw} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{ii}\PY{p}{)}
+                \PY{n}{tmp} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{x} \PY{o}{/} \PY{n}{sd} \PY{o}{*} \PY{n}{weights}\PY{p}{[}\PY{n}{lw} \PY{o}{+} \PY{n}{ii}\PY{p}{]}
+                \PY{n}{weights}\PY{p}{[}\PY{n}{lw} \PY{o}{+} \PY{n}{ii}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{tmp}
+                \PY{n}{weights}\PY{p}{[}\PY{n}{lw} \PY{o}{\PYZhy{}} \PY{n}{ii}\PY{p}{]} \PY{o}{=} \PY{n}{tmp}
+            \PY{k}{return} \PY{n}{correlate1d}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,} \PY{n}{weights}\PY{p}{,} \PY{n}{axis}\PY{p}{,} \PY{n}{output}\PY{p}{,} \PY{n}{mode}\PY{p}{,} \PY{n}{cval}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{gaussDerive2D}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{output}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{input} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n+nb}{input}\PY{p}{)}
+            \PY{n}{output} \PY{o}{=} \PY{n}{\PYZus{}ni\PYZus{}support}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}output}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,} \PY{n+nb}{input}\PY{p}{)}
+            \PY{n}{sigmas} \PY{o}{=} \PY{n}{\PYZus{}ni\PYZus{}support}\PY{o}{.}\PY{n}{\PYZus{}normalize\PYZus{}sequence}\PY{p}{(}\PY{n}{sigma}\PY{p}{,} \PY{n+nb}{input}\PY{o}{.}\PY{n}{ndim}\PY{p}{)}
+            \PY{n}{axes} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{input}\PY{o}{.}\PY{n}{ndim}\PY{p}{)}\PY{p}{)}
+            \PY{n}{axes} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{n}{ii}\PY{p}{]}\PY{p}{,} \PY{n}{sigmas}\PY{p}{[}\PY{n}{ii}\PY{p}{]}\PY{p}{)}
+                                \PY{k}{for} \PY{n}{ii} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{axes}\PY{p}{)}\PY{p}{)} \PY{k}{if} \PY{n}{sigmas}\PY{p}{[}\PY{n}{ii}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mf}{1e\PYZhy{}15}\PY{p}{]}
+            \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{axes}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{for} \PY{n}{axis}\PY{p}{,} \PY{n}{sigma} \PY{o+ow}{in} \PY{n}{axes}\PY{p}{:}
+                    \PY{n}{gaussian\PYZus{}derivative\PYZus{}filter1d}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{axis}\PY{p}{,} \PY{n}{output}\PY{p}{)}
+                    \PY{n+nb}{input} \PY{o}{=} \PY{n}{output}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{output}\PY{p}{[}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]} \PY{o}{=} \PY{n+nb}{input}\PY{p}{[}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}
+            \PY{k}{return} \PY{n}{output}
+        
+        \PY{k}{def} \PY{n+nf}{gaussDeriveApplyFilter}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{output}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cval}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{multichannel}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{preserve\PYZus{}range}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{truncate}\PY{o}{=}\PY{l+m+mf}{4.0}\PY{p}{)}\PY{p}{:}
+            \PY{n}{spatial\PYZus{}dims} \PY{o}{=} \PY{n}{guess\PYZus{}spatial\PYZus{}dimensions}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+            \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{sigma}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.0}\PY{p}{)}\PY{p}{:}
+                \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sigma values less than zero are not valid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{if} \PY{n}{multichannel}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} do not filter across channels}
+                \PY{k}{if} \PY{o+ow}{not} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{sigma}\PY{p}{,} \PY{n}{coll}\PY{o}{.}\PY{n}{Iterable}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{sigma} \PY{o}{=} \PY{p}{[}\PY{n}{sigma}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{image}\PY{o}{.}\PY{n}{ndim} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{sigma}\PY{p}{)} \PY{o}{!=} \PY{n}{image}\PY{o}{.}\PY{n}{ndim}\PY{p}{:}
+                    \PY{n}{sigma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{image} \PY{o}{=} \PY{n}{convert\PYZus{}to\PYZus{}float}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{preserve\PYZus{}range}\PY{p}{)}
+            \PY{k}{return} \PY{n}{gaussDerive2D}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{compute-and-display-the-effect-of-our-filter}{%
+\section{Compute and Display the effect of our
+filter}\label{compute-and-display-the-effect-of-our-filter}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{normalize}
+        
+        \PY{n}{sigmas} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}
+        
+        \PY{n}{f}\PY{p}{,} \PY{n}{axarr} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+        \PY{k}{for} \PY{n}{sigma} \PY{o+ow}{in} \PY{n}{sigmas}\PY{p}{:}
+            \PY{n}{magIm} \PY{o}{=} \PY{n}{gaussDeriveApplyFilter}\PY{p}{(}\PY{n}{keanu}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+            \PY{n}{magIm} \PY{o}{=} \PY{n}{normalize}\PY{p}{(}\PY{n}{magIm}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{norm}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{255.0}
+            \PY{n}{idx} \PY{o}{=} \PY{n}{sigmas}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}print((int(idx/3), idx\PYZpc{}3))}
+            \PY{n}{axarr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{idx}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].axis(\PYZsq{}off\PYZsq{})
+            \PY{n}{axarr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{idx}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].set\PYZus{}title(f\PYZsq{}\PYZdl{}\PYZbs{}sigma\PYZdl{} = \PYZob{}sigma\PYZcb{}\PYZsq{})
+            \PY{n}{axarr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{idx}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].imshow(magIm, cmap = \PYZsq{}gray\PYZsq{}, aspect=\PYZsq{}auto\PYZsq{})
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Note: Due to conversion of float to int while displaying, the
+\texttt{cmap=\textquotesingle{}gray\textquotesingle{}} acts a little
+wonky, but functionally there is little difference
+
+    \hypertarget{threshold-with-different-t-levels}{%
+\section{Threshold with different T
+levels}\label{threshold-with-different-t-levels}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{magIm} \PY{o}{=} \PY{n}{gaussDeriveApplyFilter}\PY{p}{(}\PY{n}{keanu}\PY{p}{,} \PY{n}{sigma} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}magIm = (magIm \PYZhy{} magIm.min(0)) *255.0 / magIm.ptp(0)}
+        
+        \PY{n}{magIm} \PY{o}{=} \PY{n}{normalize}\PY{p}{(}\PY{n}{magIm}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{norm}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{255.0}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{threshLevels} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{75}\PY{p}{,} \PY{l+m+mi}{125}\PY{p}{,} \PY{l+m+mi}{175}\PY{p}{,} \PY{l+m+mi}{225}\PY{p}{]}
+        \PY{n}{f}\PY{p}{,} \PY{n}{axarr} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+        \PY{k}{for} \PY{n}{thresh} \PY{o+ow}{in} \PY{n}{threshLevels}\PY{p}{:}
+            \PY{n}{tImg} \PY{o}{=} \PY{n}{magIm} \PY{o}{\PYZgt{}} \PY{n}{thresh}
+            \PY{n}{idx} \PY{o}{=} \PY{n}{threshLevels}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{thresh}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}print((int(idx/3), idx\PYZpc{}3))}
+            \PY{n}{axarr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{idx}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].axis(\PYZsq{}off\PYZsq{})
+            \PY{n}{axarr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{idx}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].set\PYZus{}title(f\PYZsq{}Value = \PYZob{}thresh\PYZcb{}\PYZsq{})
+            \PY{n}{axarr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{idx}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].imshow(tImg, cmap = \PYZsq{}gray\PYZsq{}, aspect=\PYZsq{}auto\PYZsq{})
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We notice that our native implementation, when thresholded properly (
+value of 50) generates a semi-decent edge detector. But due to the
+calculation of gaussian manually and what seems to be precision round
+off errors, we can notice some grainy-ness in the final result. (There
+are some specks of activation on the forehead for example). Later we
+would observe that Sobel operator gives a similar result without the
+grainyness because of (what I assume is) the kernel using whole numbers.
+
+    \hypertarget{compare-with-sobel-masks}{%
+\section{Compare with Sobel masks}\label{compare-with-sobel-masks}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{sobel}
+        
+        \PY{n}{edges1} \PY{o}{=} \PY{n}{sobel}\PY{p}{(}\PY{n}{keanu}\PY{p}{)}
+        \PY{n}{edges2} \PY{o}{=} \PY{n}{sobel}\PY{p}{(}\PY{n}{gaussian}\PY{p}{(}\PY{n}{keanu}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} display results}
+        \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{,} \PY{n}{ax3}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,}
+                                            \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{keanu}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{edges1}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+        \PY{n}{ax2}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sobel filter, no blur}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{ax3}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{edges2}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+        \PY{n}{ax3}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sobel filter, \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sigma=3\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the above image we can see that the sobel filter generates a more
+fine and smooth lines for the edges compared to the gaussian derivative
+filter that we created. In order to account for the difference in
+smoothing, if we try to blur the image before applying Sobel's filter,
+we would intuitively expect the lines to become more continuous, but
+upon doing so we see that the blurring only makes the edges more
+prominent and doesn't improve the overall continuity of the edges.
+
+    \hypertarget{canny-edge-detector}{%
+\section{Canny Edge detector}\label{canny-edge-detector}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{ndimage} \PY{k}{as} \PY{n}{ndi}
+         
+         \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{feature}
+         
+         \PY{n}{edges1} \PY{o}{=} \PY{n}{feature}\PY{o}{.}\PY{n}{canny}\PY{p}{(}\PY{n}{keanu}\PY{p}{)}
+         \PY{n}{edges2} \PY{o}{=} \PY{n}{feature}\PY{o}{.}\PY{n}{canny}\PY{p}{(}\PY{n}{keanu}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} display results}
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{,} \PY{n}{ax3}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,}
+                                             \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{keanu}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{edges1}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Canny filter, \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sigma=1\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{edges2}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Canny filter, \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sigma=3\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that unlike Sobel or our Gaussian derivative filter, the
+canny edge detector generates a more complete contour line that is
+continuous. Even upon increasing \(\sigma\) we can observe that we do
+not loose the continuity, but some of the smaller less relevant features
+like eyebrows or tufts of hairline are not detected as edges. This
+version would work better for something like face recognization feature.
+
+    Though the homework ends here, I have included some optional bonus stuff
+that illustrates some fun little uses of the things we've learnt so far.
+
+    \hypertarget{optional-etch-a-sketch-effect}{%
+\section{Optional: Etch-a-sketch
+effect}\label{optional-etch-a-sketch-effect}}
+
+    This is a fun little exercise where we can apply Sobel's operator with
+some pre-processing to generate ``sketch-like'' effect. The
+pre-processing entails a simple gaussian blur for making the edges more
+prominent, then applying sobel operator and thresholding it to generate
+what appears to be pencil strokes. (Also the thickness of the pencil is
+determined by the strength of our blur)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{color} \PY{k}{import} \PY{n}{rgb2gray}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{util} \PY{k}{import} \PY{n}{invert}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{sobel}\PY{p}{,} \PY{n}{threshold\PYZus{}otsu}
+         
+         \PY{n}{keanu\PYZus{}colour} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keanu\PYZus{}colour.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{blur\PYZus{}keanu} \PY{o}{=} \PY{n}{gaussian}\PY{p}{(}\PY{n}{keanu\PYZus{}colour}\PY{p}{)}
+         
+         \PY{n}{clean\PYZus{}keanu} \PY{o}{=} \PY{n}{rgb2gray}\PY{p}{(}\PY{n}{blur\PYZus{}keanu}\PY{p}{)}
+         
+         \PY{n}{edge\PYZus{}keanu} \PY{o}{=} \PY{n}{sobel}\PY{p}{(}\PY{n}{clean\PYZus{}keanu}\PY{p}{)}
+         
+         \PY{n}{thresh\PYZus{}mesh} \PY{o}{=} \PY{n}{threshold\PYZus{}otsu}\PY{p}{(}\PY{n}{edge\PYZus{}keanu}\PY{p}{)}
+         
+         \PY{n}{binary\PYZus{}keanu} \PY{o}{=} \PY{n}{edge\PYZus{}keanu} \PY{o}{\PYZgt{}} \PY{n}{thresh\PYZus{}mesh}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{invert}\PY{p}{(}\PY{n}{binary\PYZus{}keanu}\PY{p}{)}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/lib/python3.7/site-packages/skimage/filters/\_gaussian.py:108: RuntimeWarning: Images with dimensions (M, N, 3) are interpreted as 2D+RGB by default. Use `multichannel=False` to interpret as 3D image with last dimension of length 3.
+  warn(RuntimeWarning(msg))
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} <matplotlib.image.AxesImage at 0x7f48dad8e4a8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{optional-a-scanner-darkly-effect-using-image-segmentation}{%
+\section{Optional: A Scanner Darkly Effect using Image
+Segmentation}\label{optional-a-scanner-darkly-effect-using-image-segmentation}}
+
+    Note: The effect used in the movie is actually a
+\href{https://www.wikiwand.com/en/Cel_shading}{cel-shading effect},
+which is performed by computing the normals for world surfaces (which
+uses 3D models) and blending them with the Sobel operator (used for
+edges to give ``Toon''-lines). Since, we work with a 2D image for our
+course, I will be using Image Segmentation to achieve a similar effect,
+albeit one that's more simplistic looking.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{data}\PY{p}{,} \PY{n}{io}\PY{p}{,} \PY{n}{segmentation}\PY{p}{,} \PY{n}{color}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{future} \PY{k}{import} \PY{n}{graph}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+         
+         
+         \PY{n}{keanu\PYZus{}colour} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keanu\PYZus{}colour.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{labels1} \PY{o}{=} \PY{n}{segmentation}\PY{o}{.}\PY{n}{quickshift}\PY{p}{(}\PY{n}{keanu\PYZus{}colour}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{max\PYZus{}dist}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,} \PY{n}{ratio}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{out1} \PY{o}{=} \PY{n}{color}\PY{o}{.}\PY{n}{label2rgb}\PY{p}{(}\PY{n}{labels1}\PY{p}{,} \PY{n}{keanu\PYZus{}colour}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{g} \PY{o}{=} \PY{n}{graph}\PY{o}{.}\PY{n}{rag\PYZus{}mean\PYZus{}color}\PY{p}{(}\PY{n}{keanu\PYZus{}colour}\PY{p}{,} \PY{n}{labels1}\PY{p}{)}
+         \PY{n}{labels2} \PY{o}{=} \PY{n}{graph}\PY{o}{.}\PY{n}{cut\PYZus{}threshold}\PY{p}{(}\PY{n}{labels1}\PY{p}{,} \PY{n}{g}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{out2} \PY{o}{=} \PY{n}{color}\PY{o}{.}\PY{n}{label2rgb}\PY{p}{(}\PY{n}{labels2}\PY{p}{,} \PY{n}{keanu\PYZus{}colour}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{out2} \PY{o}{=} \PY{n}{segmentation}\PY{o}{.}\PY{n}{mark\PYZus{}boundaries}\PY{p}{(}\PY{n}{out2}\PY{p}{,} \PY{n}{labels2}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{out1}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Initial quickshift segmentation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{out2}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Applying regional averaging}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{ax}\PY{p}{:}
+             \PY{n}{a}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}plt.tight\PYZus{}layout()}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
