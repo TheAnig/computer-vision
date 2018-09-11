@@ -1,0 +1,708 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw3-soln}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \noindent
+\large\textbf{Homework Assignment 3} \hfill \textbf{Anirudh Ganesh} \\
+\normalsize Computer Vision for HCI \hfill CSE5524 (Au `18) \\
+Prof. Jim Davis \hfill Score: \_\_\_/18 \\
+TA: Sayan Mandal \hfill Due Date: 09/11/18
+    
+    
+
+    
+    \hypertarget{imports}{%
+\subsubsection{Imports}\label{imports}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{imread}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{gaussian}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{img\PYZus{}as\PYZus{}float}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{color} \PY{k}{import} \PY{n}{rgb2gray}
+        
+        \PY{n}{mittens} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/murder\PYZus{}mittens.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{gray\PYZus{}mitts} \PY{o}{=} \PY{n}{rgb2gray}\PY{p}{(}\PY{n}{mittens}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{generate-4-layer-gaussian-pyramid}{%
+\section{Generate 4 Layer Gaussian
+Pyramid}\label{generate-4-layer-gaussian-pyramid}}
+
+    \hypertarget{helper-functions}{%
+\subsection{Helper Functions}\label{helper-functions}}
+
+Some more details on the helper functions, \texttt{smooth} and
+\texttt{resize}.
+
+\texttt{smooth} applies a simple Gaussian filter over the given image.
+This is used to compute \$ G(m,n) = w(m)w(n) \$ where
+\(w(m) = [ 0.25 - 0.5a, 0.25, a, 0.25, 0.25 - 0.5a ]\). In-order to
+apply this `a' notice that we had implemented the gaussian filter as:
+
+(snippet)
+
+\begin{verbatim}
+    lw = int(truncate * sd + 0.5)
+    weights = [0.0] * (2 * lw + 1)
+    weights[lw] = 1.0
+    sum = 1.0
+    sd = sd * sd
+    # calculate the kernel:
+    for ii in range(1, lw + 1):
+        tmp = math.exp(-0.5 * float(ii * ii) / sd)
+        weights[lw + ii] = tmp
+        weights[lw - ii] = tmp
+        sum += 2.0 * tmp
+    for ii in range(2 * lw + 1):
+        weights[ii] /= sum
+\end{verbatim}
+
+Thus, by using a \(\sigma\) of 0.5, we get
+\texttt{int(4\ *\ 0.5\ +\ 0.5)\ =\ 2} which gets us
+\texttt{weights\ =\ {[}0.0{]}\ *\ (2\ *\ 2\ +\ 1)} which then gets
+filled as \texttt{weights\ =\ {[}0.05,\ 0.25,\ 0.4,\ 0.25,\ 0.05{]}}
+which is our intended \(w(m)\). This is applied seperately row and
+column-wise using \texttt{correlated1d}.
+
+\texttt{resize} applies a simple resizing operation that helps us sample
+half the bits in case scaling factor is less than 1, else it applies a
+Affine Transform to double the size and fill the alternating rows with
+0. This is why we use \texttt{tform.params}.
+
+\begin{verbatim}
+    tform.params[0, 1] = 0 # This tells us to fill alternated column with 0
+    tform.params[1, 0] = 0 # This tells us to fill alternated row with 0
+\end{verbatim}
+
+Thus a \texttt{(2,2)} image when stretched to \texttt{(4,4)} will look
+like:
+
+\begin{verbatim}
+            | a | 0 | b | 0 |
+            ----------------
+            | 0 | 0 | 0 | 0 |
+ |a|b|      ----------------
+ -----  --> | a | 0 | b | 0 |
+ |a|b|      ----------------
+            | 0 | 0 | 0 | 0 |
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{ndimage} \PY{k}{as} \PY{n}{ndi}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{transform}\PY{n+nn}{.}\PY{n+nn}{\PYZus{}geometric} \PY{k}{import} \PY{n}{AffineTransform}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{transform}\PY{n+nn}{.}\PY{n+nn}{\PYZus{}warps} \PY{k}{import} \PY{n}{warp}
+        
+        \PY{k}{def} \PY{n+nf}{smooth}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}\PY{p}{:}
+            \PY{n}{smoothed} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{image}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{double}\PY{p}{)}
+            \PY{n}{ndi}\PY{o}{.}\PY{n}{gaussian\PYZus{}filter}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{output}\PY{o}{=}\PY{n}{smoothed}\PY{p}{)}
+            \PY{k}{return} \PY{n}{smoothed}
+        
+        
+        \PY{k}{def} \PY{n+nf}{resize}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{output\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+            \PY{n}{output\PYZus{}shape} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{output\PYZus{}shape}\PY{p}{)}
+            \PY{n}{input\PYZus{}shape} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{shape}
+        
+            \PY{n}{factors} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)} \PY{o}{/}
+                       \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{output\PYZus{}shape}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{rows} \PY{o}{=} \PY{n}{output\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{cols} \PY{o}{=} \PY{n}{output\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{input\PYZus{}rows} \PY{o}{=} \PY{n}{input\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{input\PYZus{}cols} \PY{o}{=} \PY{n}{input\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{k}{if} \PY{n}{rows} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{cols} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                \PY{n}{tform} \PY{o}{=} \PY{n}{AffineTransform}\PY{p}{(}\PY{n}{translation}\PY{o}{=}\PY{p}{(}\PY{n}{input\PYZus{}cols} \PY{o}{/} \PY{l+m+mf}{2.0} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.5}\PY{p}{,}
+                                                     \PY{n}{input\PYZus{}rows} \PY{o}{/} \PY{l+m+mf}{2.0} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                
+                
+                \PY{c+c1}{\PYZsh{} 3 control points necessary to estimate exact AffineTransform}
+                \PY{n}{src\PYZus{}corners} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{rows}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{cols}\PY{p}{,} \PY{n}{rows}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+                \PY{n}{dst\PYZus{}corners} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{src\PYZus{}corners}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{double}\PY{p}{)}
+                
+                
+                \PY{c+c1}{\PYZsh{} take into account that 0th pixel is at position (0.5, 0.5)}
+                \PY{n}{dst\PYZus{}corners}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{factors}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{src\PYZus{}corners}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mf}{0.5}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.5}
+                \PY{n}{dst\PYZus{}corners}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{factors}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{src\PYZus{}corners}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mf}{0.5}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.5}
+        
+                \PY{n}{tform} \PY{o}{=} \PY{n}{AffineTransform}\PY{p}{(}\PY{p}{)}
+                \PY{n}{tform}\PY{o}{.}\PY{n}{estimate}\PY{p}{(}\PY{n}{src\PYZus{}corners}\PY{p}{,} \PY{n}{dst\PYZus{}corners}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Parameters for accurate resizing}
+            \PY{n}{tform}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{tform}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{tform}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+        
+            \PY{n}{out} \PY{o}{=} \PY{n}{warp}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{tform}\PY{p}{,} \PY{n}{output\PYZus{}shape}\PY{o}{=}\PY{n}{output\PYZus{}shape}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{out}
+\end{Verbatim}
+
+
+    \hypertarget{pyramid-down-function}{%
+\subsection{Pyramid Down function}\label{pyramid-down-function}}
+
+This generates a downscaled image of the given image, which is also
+smoothed out.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{pyramid\PYZus{}down}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{downscale}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+            \PY{n}{image} \PY{o}{=} \PY{n}{img\PYZus{}as\PYZus{}float}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+        
+            \PY{n}{out\PYZus{}shape} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{p}{[}\PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{d} \PY{o}{/} \PY{n+nb}{float}\PY{p}{(}\PY{n}{downscale}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{image}\PY{o}{.}\PY{n}{shape}\PY{p}{]}\PY{p}{)}
+        
+            \PY{n}{sigma} \PY{o}{=} \PY{l+m+mf}{0.5}
+        
+            \PY{n}{smoothed} \PY{o}{=} \PY{n}{smooth}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+            \PY{n}{out} \PY{o}{=} \PY{n}{resize}\PY{p}{(}\PY{n}{smoothed}\PY{p}{,} \PY{n}{out\PYZus{}shape}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{out}
+\end{Verbatim}
+
+
+    \hypertarget{gaussian-pyramid}{%
+\subsection{Gaussian Pyramid}\label{gaussian-pyramid}}
+
+Generates the Gaussian Pyramid of a given image
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{gaussian\PYZus{}pyramid}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{max\PYZus{}layer}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{downscale}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+            \PY{n}{image} \PY{o}{=} \PY{n}{img\PYZus{}as\PYZus{}float}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+        
+            \PY{n}{layer} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{current\PYZus{}shape} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{shape}
+        
+            \PY{n}{prev\PYZus{}layer\PYZus{}image} \PY{o}{=} \PY{n}{image}
+            \PY{k}{yield} \PY{n}{image}
+        
+            \PY{c+c1}{\PYZsh{} build downsampled images until max\PYZus{}layer is reached or downscale process}
+            \PY{c+c1}{\PYZsh{} does not change image size}
+            \PY{k}{while} \PY{n}{layer} \PY{o}{!=} \PY{n}{max\PYZus{}layer}\PY{p}{:}
+                \PY{n}{layer} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+        
+                \PY{n}{layer\PYZus{}image} \PY{o}{=} \PY{n}{pyramid\PYZus{}down}\PY{p}{(}\PY{n}{prev\PYZus{}layer\PYZus{}image}\PY{p}{,} \PY{n}{downscale}\PY{p}{)}
+        
+                \PY{n}{prev\PYZus{}shape} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{current\PYZus{}shape}\PY{p}{)}
+                \PY{n}{prev\PYZus{}layer\PYZus{}image} \PY{o}{=} \PY{n}{layer\PYZus{}image}
+                \PY{n}{current\PYZus{}shape} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{layer\PYZus{}image}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} no change to previous pyramid layer}
+                \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{n}{current\PYZus{}shape} \PY{o}{==} \PY{n}{prev\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{break}
+        
+                \PY{k}{yield} \PY{n}{layer\PYZus{}image}
+\end{Verbatim}
+
+
+    \hypertarget{laplacian-pyramid}{%
+\subsection{Laplacian Pyramid}\label{laplacian-pyramid}}
+
+Generates the Laplacian Pyramid of the given image
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{laplacian\PYZus{}pyramid}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{max\PYZus{}layer}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{downscale}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} cast to float for consistent data type in pyramid}
+            \PY{n}{image} \PY{o}{=} \PY{n}{img\PYZus{}as\PYZus{}float}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+        
+            \PY{n}{sigma} \PY{o}{=} \PY{l+m+mf}{0.5}
+        
+            \PY{n}{current\PYZus{}shape} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{shape}
+        
+            \PY{n}{smoothed\PYZus{}image} \PY{o}{=} \PY{n}{smooth}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Generate the first layer}
+            \PY{k}{yield} \PY{n}{image} \PY{o}{\PYZhy{}} \PY{n}{smoothed\PYZus{}image}
+        
+            \PY{c+c1}{\PYZsh{} build downsampled images until max\PYZus{}layer is reached or downscale process}
+            \PY{c+c1}{\PYZsh{} does not change image size}
+            \PY{k}{if} \PY{n}{max\PYZus{}layer} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                \PY{n}{max\PYZus{}layer} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{current\PYZus{}shape}\PY{p}{)}\PY{p}{,} \PY{n}{downscale}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{for} \PY{n}{layer} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{max\PYZus{}layer}\PY{p}{)}\PY{p}{:}
+        
+                \PY{n}{out\PYZus{}shape} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}
+                    \PY{p}{[}\PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{d} \PY{o}{/} \PY{n+nb}{float}\PY{p}{(}\PY{n}{downscale}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{current\PYZus{}shape}\PY{p}{]}\PY{p}{)}
+        
+                \PY{n}{resized\PYZus{}image} \PY{o}{=} \PY{n}{resize}\PY{p}{(}\PY{n}{smoothed\PYZus{}image}\PY{p}{,} \PY{n}{out\PYZus{}shape}\PY{p}{)}
+                \PY{n}{smoothed\PYZus{}image} \PY{o}{=} \PY{n}{smooth}\PY{p}{(}\PY{n}{resized\PYZus{}image}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+                \PY{n}{current\PYZus{}shape} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{resized\PYZus{}image}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        
+                \PY{k}{yield} \PY{n}{resized\PYZus{}image} \PY{o}{\PYZhy{}} \PY{n}{smoothed\PYZus{}image}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{pyramid} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{gaussian\PYZus{}pyramid}\PY{p}{(}\PY{n}{gray\PYZus{}mitts}\PY{p}{,} \PY{n}{max\PYZus{}layer}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{axarr} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+            \PY{n}{axarr}\PY{p}{[}\PY{n}{i}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].axis(\PYZsq{}off\PYZsq{})
+            \PY{n}{axarr}\PY{p}{[}\PY{n}{i}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].imshow(pyramid[i], cmap=\PYZsq{}gray\PYZsq{})
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{pyramid2} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{laplacian\PYZus{}pyramid}\PY{p}{(}\PY{n}{gray\PYZus{}mitts}\PY{p}{,} \PY{n}{max\PYZus{}layer}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{axarr} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+            \PY{n}{axarr}\PY{p}{[}\PY{n}{i}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].axis(\PYZsq{}off\PYZsq{})
+            \PY{n}{axarr}\PY{p}{[}\PY{n}{i}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].imshow(pyramid2[i], cmap=\PYZsq{}gray\PYZsq{})
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{background-subtraction-single-image}{%
+\section{Background Subtraction (single
+image)}\label{background-subtraction-single-image}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{img\PYZus{}as\PYZus{}float}
+        \PY{n}{background} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/bg000.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{woman} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/walk.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{background} \PY{o}{=} \PY{n}{img\PYZus{}as\PYZus{}float}\PY{p}{(}\PY{n}{background}\PY{p}{)}
+         \PY{n}{woman} \PY{o}{=} \PY{n}{img\PYZus{}as\PYZus{}float}\PY{p}{(}\PY{n}{woman}\PY{p}{)}
+         
+         \PY{n}{diff} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{subtract}\PY{p}{(}\PY{n}{woman}\PY{p}{,} \PY{n}{background}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{threshLevels} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.15}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mf}{0.50}\PY{p}{,} \PY{l+m+mf}{0.65}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{]}
+         \PY{n}{f}\PY{p}{,} \PY{n}{axarr} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+         \PY{k}{for} \PY{n}{thresh} \PY{o+ow}{in} \PY{n}{threshLevels}\PY{p}{:}
+             \PY{n}{tImg} \PY{o}{=} \PY{n}{diff} \PY{o}{\PYZgt{}} \PY{n}{thresh}
+             \PY{n}{idx} \PY{o}{=} \PY{n}{threshLevels}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{thresh}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}print((int(idx/3), idx\PYZpc{}3))}
+             \PY{n}{axarr}\PY{p}{[}\PY{n}{idx} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].axis(\PYZsq{}off\PYZsq{})
+             \PY{n}{axarr}\PY{p}{[}\PY{n}{idx} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].set\PYZus{}title(f\PYZsq{}Value = \PYZob{}thresh\PYZcb{}\PYZsq{})
+             \PY{n}{axarr}\PY{p}{[}\PY{n}{idx} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].imshow(tImg, cmap = \PYZsq{}gray\PYZsq{}, aspect=\PYZsq{}auto\PYZsq{})
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the above diagram, we can clearly observe that for threshold values
+\texttt{0.3\ and\ 0.25} our naive subtraction does a pretty good job of
+identifying the woman from the background. However, notice that higher
+values like \texttt{0.75} and \texttt{0.15} do a bad job. Not only does
+the lower threshold introduce specs of activation all over the image,
+but also creates the overall body a lot ``grainy'', and higher threshold
+on the other hand are only able to capture small bits and pieces. If we
+were to post process these results with morphological operator, it may
+cause the person to dissappear completely, or the bounding box generated
+would be pretty bad.
+
+    \hypertarget{background-subtraction-multiple-images}{%
+\section{Background Subtraction (multiple
+images)}\label{background-subtraction-multiple-images}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{background\PYZus{}cube} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tmp} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/bg}\PY{l+s+si}{\PYZob{}:03\PYZcb{}}\PY{l+s+s1}{.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+             \PY{n}{tmp} \PY{o}{=} \PY{n}{img\PYZus{}as\PYZus{}float}\PY{p}{(}\PY{n}{tmp}\PY{p}{)}
+             \PY{n}{background\PYZus{}cube}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tmp}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{background\PYZus{}cube} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{background\PYZus{}cube}\PY{p}{)}
+         
+         \PY{n}{background\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{background\PYZus{}cube}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{background\PYZus{}std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{background\PYZus{}cube}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{0.1}
+         
+         \PY{n}{diff\PYZus{}mahalanobis} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{divide}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{subtract}\PY{p}{(}\PY{n}{woman}\PY{p}{,} \PY{n}{background\PYZus{}mean}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{background\PYZus{}std}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{threshLevels} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{32}\PY{p}{]}
+         \PY{n}{f}\PY{p}{,} \PY{n}{axarr} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+         \PY{k}{for} \PY{n}{thresh} \PY{o+ow}{in} \PY{n}{threshLevels}\PY{p}{:}
+             \PY{n}{tImg} \PY{o}{=} \PY{n}{diff\PYZus{}mahalanobis} \PY{o}{\PYZgt{}} \PY{n}{thresh}
+             \PY{n}{idx} \PY{o}{=} \PY{n}{threshLevels}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{thresh}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}print((int(idx/3), idx\PYZpc{}3))}
+             \PY{n}{axarr}\PY{p}{[}\PY{n}{idx} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].axis(\PYZsq{}off\PYZsq{})
+             \PY{n}{axarr}\PY{p}{[}\PY{n}{idx} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].set\PYZus{}title(f\PYZsq{}Value = \PYZob{}thresh\PYZcb{}\PYZsq{})
+             \PY{n}{axarr}\PY{p}{[}\PY{n}{idx} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{idx}\PY{o}{\PYZpc{}}\PY{k}{3}].imshow(tImg, cmap = \PYZsq{}gray\PYZsq{}, aspect=\PYZsq{}auto\PYZsq{})
+             
+         \PY{n}{thresh} \PY{o}{=} \PY{n}{diff\PYZus{}mahalanobis} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    With our statistical model built upon a better understanding of what it
+looks like to be part of background, we notice that the person is
+detected pretty accurately. Also notice that this model is more tolerant
+to increased thresholds. Even at \texttt{T\ =\ 32} which covers more
+than 5 times the standard deviations, a level of significance so low
+that its barely used in most statistical analysis, we see that our
+thresholding holds up the upper body of the person relatively the same.
+This robustness I believe is completely worth the (minor) computation
+overhead that we incur.
+
+    \hypertarget{dilate-image}{%
+\section{Dilate image}\label{dilate-image}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{closing}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{square}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{closing}\PY{p}{(}\PY{n}{thresh}\PY{p}{,} \PY{n}{square}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} <matplotlib.image.AxesImage at 0x237a9788048>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As expected that with a reasonable threshold, our dialated image
+generates a pretty neat ``blob'' of the person. Notice that the hip
+region is still broken, but this seems to be a quirk of the image, and
+not of the model that we have built
+
+    \hypertarget{connected-components-algorithm}{%
+\section{Connected Components
+Algorithm}\label{connected-components-algorithm}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{segmentation} \PY{k}{import} \PY{n}{clear\PYZus{}border}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{measure} \PY{k}{import} \PY{n}{label}\PY{p}{,} \PY{n}{regionprops}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{closing}\PY{p}{,} \PY{n}{square}
+         \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{color} \PY{k}{import} \PY{n}{label2rgb}
+         
+         \PY{n}{bw} \PY{o}{=} \PY{n}{dilation}\PY{p}{(}\PY{n}{thresh}\PY{p}{,} \PY{n}{square}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{cleared} \PY{o}{=} \PY{n}{clear\PYZus{}border}\PY{p}{(}\PY{n}{bw}\PY{p}{)}
+         
+         \PY{n}{label\PYZus{}image} \PY{o}{=} \PY{n}{label}\PY{p}{(}\PY{n}{cleared}\PY{p}{)}
+         \PY{n}{image\PYZus{}label\PYZus{}overlay} \PY{o}{=} \PY{n}{label2rgb}\PY{p}{(}\PY{n}{label\PYZus{}image}\PY{p}{,} \PY{n}{image}\PY{o}{=}\PY{n}{woman}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image\PYZus{}label\PYZus{}overlay}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <matplotlib.image.AxesImage at 0x237a97e6278>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can observe that our connected components algorithm does a pretty
+good job of identifying the person as a single component, (highlighted
+here in blue)
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

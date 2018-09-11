@@ -1,0 +1,10 @@
+\BOOKMARK [3][-]{subsubsection.0.0.1}{Imports}{}% 1
+\BOOKMARK [1][-]{section.1}{Generate 4 Layer Gaussian Pyramid}{}% 2
+\BOOKMARK [2][-]{subsection.1.1}{Helper Functions}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.2}{Pyramid Down function}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.3}{Gaussian Pyramid}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.4}{Laplacian Pyramid}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{Background Subtraction \(single image\)}{}% 7
+\BOOKMARK [1][-]{section.3}{Background Subtraction \(multiple images\)}{}% 8
+\BOOKMARK [1][-]{section.4}{Dilate image}{}% 9
+\BOOKMARK [1][-]{section.5}{Connected Components Algorithm}{}% 10
