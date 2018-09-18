@@ -1,0 +1,5 @@
+\BOOKMARK [2][-]{subsection.0.1}{Imports}{}% 1
+\BOOKMARK [1][-]{section.1}{Function to compute the moments of the image}{}% 2
+\BOOKMARK [1][-]{section.2}{Load up eigdata.txt and perform background-subtraction}{}% 3
+\BOOKMARK [1][-]{section.3}{Compute Eigenvalues and Eigenvectors of the data}{}% 4
+\BOOKMARK [1][-]{section.4}{Make the data un-correlated}{}% 5
