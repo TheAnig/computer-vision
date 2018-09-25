@@ -1,0 +1,6 @@
+\BOOKMARK [3][-]{subsubsection.0.0.1}{Imports}{}% 1
+\BOOKMARK [1][-]{section.1}{Find best image differencing parameters.}{}% 2
+\BOOKMARK [2][-]{subsection.1.1}{Simple Image Difference}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Perform Motion History Imaging and Motion Energy Imaging using the best differencing technique}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Similtude Moments for the last MHI and MEI}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Perform Optic Flow on the set of images using the best differencing technique}{}% 6
