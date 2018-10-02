@@ -1,0 +1,6 @@
+\BOOKMARK [1][-]{section.1}{Covariance Tracking}{}% 1
+\BOOKMARK [1][-]{section.2}{Mean-shift Tracking}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Create a function to extract a feature vector for each pixel in a circular neighborhood}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Create a function to build a color histogram from a neighborhood of points}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Create a function to calculate a vector of the mean-shift weights}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Use the functions above to perform mean-shift tracking}{section.2}% 6
