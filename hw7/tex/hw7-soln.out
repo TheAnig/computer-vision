@@ -1,0 +1,8 @@
+\BOOKMARK [1][-]{section.1}{Harris pixel-wise cornerness detector}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Calculating Gaussian window/weighting function with a standard deviation of \134sigma\137I = 1}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Calculating Gaussian gradients with a standard deviation of \134sigma\137D = 0.7}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Values of R\(17:23, 17:23\)}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Threshold R}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{Non-maximal Suppression}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{FAST feature point detector}{}% 7
+\BOOKMARK [1][-]{section.3}{Bonus comparision with standard library results}{}% 8
