@@ -1,0 +1,2 @@
+matplotlib==2.2.3
+numpy==1.15.1
